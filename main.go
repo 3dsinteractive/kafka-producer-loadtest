@@ -10,14 +10,6 @@ func main() {
 
 	servers := "localhost:9094"
 	topic := "loadtest-" + randString()
-	// groupID := "loadtest-consumer"
-	// timeout := time.Duration(-1)
-
-	// ms.Consume(servers, topic, groupID, timeout, func(ctx IContext) error {
-	// 	msg := ctx.ReadInput()
-	// 	ctx.Log(msg)
-	// 	return nil
-	// })
 
 	prod := NewProducer(servers, ms)
 	i := 0
