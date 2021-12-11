@@ -11,7 +11,6 @@ func main() {
 	servers := "localhost:9094"
 	topic := "loadtest-" + randString()
 
-	prod := NewProducer(servers, ms)
 	i := 0
 	go func() {
 		t := time.NewTicker(time.Second * 10)
@@ -22,7 +21,12 @@ func main() {
 				return
 			default:
 				i++
-				prod.SendMessage(topic, "", map[string]interface{}{"message_id": i})
+				prod := NewProducer(servers, ms)
+				err := prod.SendMessage(topic, "", map[string]interface{}{"message_id": i})
+				if err != nil {
+					logE(err)
+					ms.Stop()
+				}
 				print("%d", i)
 			}
 		}

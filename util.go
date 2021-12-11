@@ -14,3 +14,8 @@ func randString() string {
 func print(format string, val ...interface{}) {
 	fmt.Printf(format+"\n", val...)
 }
+
+func logE(err error) error {
+	fmt.Printf("error: %s", err.Error())
+	return err
+}
